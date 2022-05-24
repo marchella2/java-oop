@@ -15,6 +15,28 @@ class Player{
         this.health = health;
     }
 
+    void attack(Player opponent){
+        double attackPower = this.weapon.attackPower;
+        System.out.println(this.name + " attacking " + opponent.name + " with power " + attackPower);
+
+        opponent.defence(attackPower);
+    }
+
+    void defence(double attackPower){
+
+        // Akan mengambil damage
+        double damage;
+        if (this.armor.defencePower < attackPower){
+            damage = attackPower - this.armor.defencePower;
+        } else {
+            damage = 0;
+        }
+
+        this.health -= damage;
+
+        System.out.println(this.name + " gets damage " + damage);
+    }
+
     void equipWeapon(Weapon weapon){
         this.weapon = weapon;
     }
@@ -83,6 +105,17 @@ public class Latihan1 {
         // player2 equip weapon and armor
         player2.equipWeapon(ketapel);
         player2.equipArmor(kaos);
+        player2.display();
+
+        System.out.println("Pertempuran");
+        System.out.println("Episode 1");
+        player1.attack(player2);
+        player1.display();
+        player2.display();
+
+        System.out.println("Episode 2");
+        player2.attack(player1);
+        player1.display();
         player2.display();
 
     }
